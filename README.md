@@ -1,3 +1,6 @@
+cd backend/MLOpsRoadmap.Api && dotnet run
+cd frontend && npm run dev
+
 # MLOps Roadmap for .NET Developers with Python
 
 ## 📋 Table of Contents
