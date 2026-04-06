@@ -1793,9 +1793,12 @@ kubectl get svc
 kubectl logs -f <pod-name>
 ```
 
-Due to length limitations, I'll continue with the remaining sections. Would you like me to:
+# Backend
+cd backend/MLOpsRoadmap.Api && dotnet run
 
-1. **Save these two files to your repository now**
-2. **Continue with the remaining sections** (Platform & Infrastructure, Step-by-Step Roadmap, Tools Stack, Projects, Resources, Pitfalls, Comparison)
+# Frontend (in another terminal)
+cd frontend && npm run dev
 
-Which would you prefer? I can save what we have so far and then add the remaining sections in subsequent commits.
+# Or with Docker
+docker-compose up
+
