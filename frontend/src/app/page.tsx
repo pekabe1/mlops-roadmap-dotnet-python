@@ -7,6 +7,8 @@ import { fetchModules, fetchProgress, updateProgress } from "@/lib/api";
 import {
   loadLocalProgress,
   setLocalModuleProgress,
+  saveLocalModules,
+  loadLocalModules,
 } from "@/lib/progress";
 import RoadmapView from "@/components/RoadmapView";
 import LessonView from "@/components/LessonView";
@@ -25,6 +27,7 @@ export default function HomePage() {
     try {
       const [mods, prog] = await Promise.all([fetchModules(), fetchProgress()]);
       setModules(mods);
+      saveLocalModules(mods);
       const map: ProgressMap = {};
       prog.forEach((r) => {
         map[r.moduleId] = r.completed;
@@ -34,12 +37,7 @@ export default function HomePage() {
     } catch {
       // Backend unavailable — fall back to localStorage
       setBackendOnline(false);
-      try {
-        const mods = await fetchModules();
-        setModules(mods);
-      } catch {
-        // Use empty modules if backend is completely down
-      }
+      setModules(loadLocalModules());
       setProgress(loadLocalProgress());
     } finally {
       setLoading(false);
