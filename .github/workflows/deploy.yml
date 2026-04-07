@@ -13,6 +13,8 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -43,6 +45,8 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}:${{ github.sha }}
             ${{ env.REGISTRY }}/${{ env.FRONTEND_IMAGE }}:latest
           build-args: |
+            # NEXT_PUBLIC_API_URL is inlined at build time by Next.js.
+            # Update this secret when the backend URL changes and rebuild.
             NEXT_PUBLIC_API_URL=${{ secrets.BACKEND_URL }}
 
       - name: Log in to Azure
